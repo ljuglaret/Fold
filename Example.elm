@@ -10,18 +10,18 @@ import Test exposing (..)
 testsFold : Test
 testsFold =   describe "Fold"
         [ describe "T1"
-            [fuzz (list int) "reverse" <|
+            [fuzz (list (intRange -15 15)) "reverse" <|
                     \l ->
                         l
                             |> reverseG
                             |> Expect.equal (List.reverse l)
-            ,fuzz (list int) "all" <|
+            ,fuzz (list (intRange -15 15)) "all" <|
                     \l ->
                         l
                             |> allFold (\x -> modBy 2 x == 0 ) 
                             |> Expect.equal (List.all (\x -> modBy 2 x == 0 ) l)
             
-            ,fuzz(list int ) "any" <|
+            ,fuzz(list (intRange -15 15))"any" <|
                 \l->
                     l
                         |>anyFold (\x -> modBy 2 x == 0 )
